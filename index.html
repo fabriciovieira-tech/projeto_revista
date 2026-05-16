@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Éternel | Catálogo Editorial</title>
+    <!-- Importando fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content fade-up">
+            <span class="eyebrow">A Nova Coleção</span>
+            <h1 class="hero-title">L'Éternel</h1>
+            <p class="hero-subtitle">A essência do tempo, capturada em vidro e luz.</p>
+        </div>
+        <div class="hero-image-wrapper fade-up">
+            <!-- Imagem de espaço negativo amplo -->
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=2000&auto=format&fit=crop" alt="Frasco de Perfume L'Éternel" class="hero-image">
+        </div>
+    </header>
+
+    <!-- Catálogo Assimétrico -->
+    <section class="catalog">
+        
+        <!-- Produto 1: Imagem à esquerda, texto deslocado -->
+        <article class="editorial-block left-heavy">
+            <div class="block-image fade-in">
+                <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?q=80&w=1000&auto=format&fit=crop" alt="Perfume Floral">
+            </div>
+            <div class="block-text fade-up delay-1">
+                <h2>Nocturne<br><em>Nº 01</em></h2>
+                <p>Uma composição audaciosa que contrasta a delicadeza do jasmim noturno com a força bruta da madeira de Oud. Feito para quem domina a própria narrativa.</p>
+                <div class="notes">
+                    <strong>Notas:</strong> Jasmim, Pimenta Rosa, Oud e Baunilha.
+                </div>
+                <button class="btn-editorial">Descobrir</button>
+            </div>
+        </article>
+
+        <!-- Produto 2: Texto à esquerda, imagem menor à direita (quebra de ritmo) -->
+        <article class="editorial-block right-heavy">
+            <div class="block-text fade-up">
+                <h2>Aura<br><em>Botanique</em></h2>
+                <p>Respirar o orvalho da manhã. Aura traz notas verdes puras, destiladas a frio para preservar a integridade absoluta da folha de figo e do lírio do vale.</p>
+                <button class="btn-editorial">Descobrir</button>
+            </div>
+            <div class="block-image small-image fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1000&auto=format&fit=crop" alt="Ingredientes Botânicos">
+            </div>
+        </article>
+
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
