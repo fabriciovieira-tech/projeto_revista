@@ -8,7 +8,237 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- Variáveis de Design System --- */
+        :root {
+            --bg-color: #F7F5F0;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --accent: #C5A880;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        /* --- Reset Básico --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- Tipografia & Elementos Comuns --- */
+        h1, h2 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .eyebrow {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .btn-editorial {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--text-primary);
+            padding-bottom: 5px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-editorial:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* --- Hero Section (Com Correção de Sobreposição) --- */
+        .hero {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8vh 5% 4vh 5%; 
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            margin-bottom: 0; 
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            margin-bottom: 0.5rem;
+            position: relative;
+            bottom: -3vh; 
+        }
+
+        .hero-subtitle {
+            margin-bottom: 3rem; 
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-image-wrapper {
+            width: 60%;
+            height: 55vh; 
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* --- Catálogo (Layout Assimétrico) --- */
+        .catalog {
+            padding: 15vh 5% 5vh 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .editorial-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25vh;
+            gap: 5%;
+        }
+
+        /* Reduz margem do último elemento para não sobrar espaço vazio antes do footer */
+        .editorial-block:last-child {
+            margin-bottom: 10vh;
+        }
+
+        .block-image {
+            width: 55%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .block-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s ease;
+        }
+        
+        .editorial-block:hover .block-image img {
+            transform: scale(1.03); /* Leve efeito de zoom ao passar o mouse */
+        }
+
+        .block-image.small-image {
+            width: 40%;
+            height: 60vh;
+        }
+
+        .block-text {
+            width: 40%;
+            padding: 2rem;
+        }
+
+        .block-text h2 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            margin-bottom: 2rem;
+        }
+
+        .block-text em {
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .notes {
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Inversão para o bloco right-heavy */
+        .right-heavy {
+            flex-direction: row-reverse;
+        }
+
+        /* --- Footer Minimalista --- */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid #E5E0D5;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Classes de Animação (UX Sensorial) --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .delay-1 {
+            transition-delay: 0.3s;
+        }
+
+        /* Classe ativada via JS */
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsividade Básica --- */
+        @media (max-width: 768px) {
+            .editorial-block, .right-heavy {
+                flex-direction: column;
+                margin-bottom: 15vh;
+            }
+            .block-image, .block-image.small-image, .block-text {
+                width: 100%;
+                height: auto;
+            }
+            .block-image {
+                height: 60vh;
+            }
+            .hero-image-wrapper { width: 90%; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,18 +250,17 @@
             <p class="hero-subtitle">A essência do tempo, capturada em vidro e luz.</p>
         </div>
         <div class="hero-image-wrapper fade-up">
-            <!-- Imagem de espaço negativo amplo -->
             <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=2000&auto=format&fit=crop" alt="Frasco de Perfume L'Éternel" class="hero-image">
         </div>
     </header>
 
     <!-- Catálogo Assimétrico -->
     <section class="catalog">
-        
-        <!-- Produto 1: Imagem à esquerda, texto deslocado -->
+       
+        <!-- Produto 1: Nocturne (Original) -->
         <article class="editorial-block left-heavy">
             <div class="block-image fade-in">
-                <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?q=80&w=1000&auto=format&fit=crop" alt="Perfume Floral">
+                <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?q=80&w=1000&auto=format&fit=crop" alt="Perfume Nocturne">
             </div>
             <div class="block-text fade-up delay-1">
                 <h2>Nocturne<br><em>Nº 01</em></h2>
@@ -43,7 +272,7 @@
             </div>
         </article>
 
-        <!-- Produto 2: Texto à esquerda, imagem menor à direita (quebra de ritmo) -->
+        <!-- Produto 2: Aura (Original) -->
         <article class="editorial-block right-heavy">
             <div class="block-text fade-up">
                 <h2>Aura<br><em>Botanique</em></h2>
@@ -51,12 +280,75 @@
                 <button class="btn-editorial">Descobrir</button>
             </div>
             <div class="block-image small-image fade-in delay-1">
-                <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1000&auto=format&fit=crop" alt="Ingredientes Botânicos">
+                <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=1000&auto=format&fit=crop" alt="Ingredientes Botânicos do Aura">
+            </div>
+        </article>
+
+        <!-- Produto 3: Solaire (NOVO - Edição Amarela) -->
+        <article class="editorial-block left-heavy">
+            <div class="block-image fade-in">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=1000&auto=format&fit=crop" alt="Perfume Solaire - Tons Amarelos e Dourados">
+            </div>
+            <div class="block-text fade-up delay-1">
+                <h2>Solaire<br><em>Nº 03</em></h2>
+                <p>A personificação do sol de fim de tarde. Solaire irradia um calor dourado e nostálgico, combinando o frescor cítrico radiante com o abraço profundo e melado do âmbar.</p>
+                <div class="notes">
+                    <strong>Notas:</strong> Bergamota, Ylang-Ylang, Mel Selvagem e Âmbar.
+                </div>
+                <button class="btn-editorial">Descobrir</button>
+            </div>
+        </article>
+
+        <!-- Produto 4: Céleste (NOVO - Edição Azul) -->
+        <article class="editorial-block right-heavy">
+            <div class="block-text fade-up">
+                <h2>Céleste<br><em>Profond</em></h2>
+                <p>Um mergulho no abismo oceânico sob um céu estrelado. Céleste é gélido e enigmático, trazendo a raridade do lótus azul envolta em uma inebriante névoa salina e amadeirada.</p>
+                <div class="notes">
+                    <strong>Notas:</strong> Sal Marinho, Lótus Azul, Íris e Cedro.
+                </div>
+                <button class="btn-editorial">Descobrir</button>
+            </div>
+            <div class="block-image small-image fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=1000&auto=format&fit=crop" alt="Perfume Céleste - Tons Azuis e Oceânicos">
             </div>
         </article>
 
     </section>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>© 2026 L'Éternel Parfums. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script de Animação (UX Sensorial) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Seleciona todos os elementos que possuem classes de animação (funciona para os novos produtos também)
+            const elementsToAnimate = document.querySelectorAll('.fade-up, .fade-in');
+
+            // Configura o observador (dispara quando 15% do elemento estiver visível)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Adiciona a classe que ativa o CSS de transição
+                        entry.target.classList.add('is-visible');
+                        // Deixa de observar após animar uma vez
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Inicia a observação para cada elemento
+            elementsToAnimate.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
